@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/citasStyles/styles_altaCita.css">
+    <link rel="stylesheet" href="./public/css/citasStyles/styles_altaCita.css">
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -18,15 +18,6 @@
     <main class="body__main">
         <form class="main__form-plantilla <?= isset($errores) && !empty($errores) ? "main__form-plantilla-error" : "" ?>" action="/tattooshop_php/citas/alta" method="post">
             <div class="form-plantilla__container">
-                <div class="form-group">
-                    <label class="fw-lighter text-lowercase text-white" for="input_id">Id</label>
-                    <input type="text"
-                        class="shadow form-control "
-                        id="input_id" name="input_id"
-                        aria-describedby="id"
-                        placeholder="Introduce el id">
-                    <?php if (!empty($errores) && isset($errores["error_id"])): ?><small id="idError" class="form-text text-danger fw-bold"><?= $errores["error_id"] ?></small><?php endif; ?>
-                </div>
                 <div class="form-group">
                     <label class="fw-lighter text-lowercase text-white" for="input_descripcion">Descripcion</label>
                     <input type="text"
@@ -59,12 +50,14 @@
                 </div>
                 <div class="form-group">
                     <label class="fw-lighter text-lowercase text-white" for="input_tatuador">Nombre tatuador</label>
-                    <input type="text"
-                        class="shadow form-control "
-                        id="input_tatuador"
-                        name="input_tatuador"
-                        placeholder="Nombre tatuador">
+                    
+                    <select name="input_tatuador" id="input_tatuador" class="form-control">
+                        <?php foreach ($tatuadores as $tatuador): ?>
+                            <option value="<?= $tatuador->getId() ?>"><?= $tatuador->getNombre() ?></option> <!-- obtengo el id del tatuador -->
+                        <?php endforeach; ?>
+                    </select>
                     <?php if (!empty($errores) && isset($errores["error_tatuador"])): ?><small id="tatuadorError" class="form-text text-danger fw-bold"><?= $errores["error_tatuador"] ?></small><?php endif; ?>
+
                 </div>
                 <div class="container__btns-form">
                     <button type="submit" class="btn btn-primary btns-form__btn-enviar">Enviar</button>
@@ -84,4 +77,4 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="../public/js/datepickerinitialzr.js"></script>
+<script src="./public/js/datepickerinitialzr.js"></script>
